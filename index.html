@@ -51,6 +51,21 @@
       background-color: #bdc3c7;
       cursor: not-allowed;
     }
+
+    .progress {
+      width: 100%;
+      height: 10px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background-color: #3498db;
+      transition: width 0.3s;
+    }
   </style>
 </head>
 <body>
@@ -63,6 +78,10 @@
     <button id="btnPause" class="btn" disabled>Pausar</button>
     <button id="btnContinue" class="btn" disabled>Continuar</button>
     <div id="textContainer"></div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
     <p>Nome do PDF: <span id="pdfName"></span></p>
     <button onclick="reloadPage()">Recarregar/Remover PDF</button>
@@ -196,11 +215,20 @@
 
     // Obtendo elementos do DOM
     const btnLoad = document.getElementById('inputFile');
+    const progressBar = document.getElementById('progressBar');
 
     // Definindo evento de clique no botão "Carregar PDF"
     btnLoad.addEventListener('change', function() {
       carregarPDF();
     });
+
+    // Função para atualizar a barra de progresso
+    function updateProgressBar() {
+      if (pdfData) {
+        const progress = (currentCharIndex / pdfData.numPages) * 100;
+        progressBar.style.width = progress + '%';
+      }
+    }
   </script>
 </body>
 </html>
