@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leitor de PDF em Voz Alta</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #textContainer {
+      font-size: 18px;
+      line-height: 1.5;
+      padding: 10px;
+      text-align: center;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #3498db;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:disabled {
+      background-color: #bdc3c7;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Leitor de PDF em Voz Alta</h1>
+
+    <input type="file" id="inputFile" accept=".pdf">
+    <label for="inputFile" class="btn">Carregar PDF</label>
+    <button id="btnRead" class="btn" disabled>Ler em Voz Alta</button>
+    <button id="btnPause" class="btn" disabled>Pausar</button>
+    <button id="btnContinue" class="btn" disabled>Continuar</button>
+    <div id="textContainer"></div>
+  </div>
+
+  <script>
+    let pdfData = null;
+    let speechSynthesisInstance = null;
+    let isPaused = false;
+    let currentCharIndex = 0;
+
+    // Função para carregar o PDF
+    function carregarPDF() {
+      const inputFile = document.getElementById('inputFile');
+
+      if (inputFile.files.length > 0) {
+        const file = inputFile.files[0];
+
+        if (file.type === 'application/pdf') {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const buffer = new Uint8Array(e.target.result);
+            pdfjsLib.getDocument(buffer).promise.then(function(pdf) {
+              pdfData = pdf;
+              const btnRead = document.getElementById('btnRead');
+              btnRead.disabled = false;
+              const btnPause = document.getElementById('btnPause');
+              btnPause.disabled = true;
+              const btnContinue = document.getElementById('btnContinue');
+              btnContinue.disabled = true;
+              btnRead.addEventListener('click', function() {
+                if (speechSynthesisInstance === null) {
+                  currentCharIndex = 0;
+                  lerTextoEmVozAlta();
+                } else {
+                  continuarLeitura();
+                }
+              });
+              btnPause.addEventListener('click', function() {
+                pausarLeitura();
+              });
+              btnContinue.addEventListener('click', function() {
+                continuarLeitura();
+              });
+            });
+          };
+          reader.readAsArrayBuffer(file);
+        } else {
+          console.error('Por favor, selecione um arquivo PDF.');
+        }
+      } else {
+        console.error('Por favor, selecione um arquivo.');
+      }
+    }
+
+    // Função para pausar a leitura em voz alta
+    function pausarLeitura() {
+      isPaused = true;
+      speechSynthesisInstance.pause();
+      const btnPause = document.getElementById('btnPause');
+      btnPause.disabled = true;
+      const btnContinue = document.getElementById('btnContinue');
+      btnContinue.disabled = false;
+    }
+
+    // Função para continuar a leitura em voz alta
+    function continuarLeitura() {
+      isPaused = false;
+      speechSynthesisInstance.resume();
+      const btnPause = document.getElementById('btnPause');
+      btnPause.disabled = false;
+      const btnContinue = document.getElementById('btnContinue');
+      btnContinue.disabled = true;
+    }
+
+    // Função para ler o texto em voz alta
+    function lerTextoEmVozAlta() {
+      if ('speechSynthesis' in window) {
+        const pagePromise = pdfData.getPage(currentCharIndex + 1);
+        pagePromise.then(function(page) {
+          return page.getTextContent();
+        }).then(function(textContent) {
+          const textItems = textContent.items.map(function(item) {
+            return item.str;
+          });
+          const texto = textItems.join(' ');
+          const utterance = new SpeechSynthesisUtterance();
+          utterance.voice = speechSynthesis.getVoices().find(function(voice) {
+            return voice.lang === 'pt-BR';
+          });
+          utterance.rate = 1;
+          utterance.text = texto;
+          utterance.onstart = function() {
+            const btnPause = document.getElementById('btnPause');
+            btnPause.disabled = false;
+            const btnContinue = document.getElementById('btnContinue');
+            btnContinue.disabled = true;
+          };
+          utterance.onend = function() {
+            const btnPause = document.getElementById('btnPause');
+            btnPause.disabled = true;
+            const btnContinue = document.getElementById('btnContinue');
+            btnContinue.disabled = true;
+            if (!isPaused && currentCharIndex < pdfData.numPages) {
+              currentCharIndex++;
+              lerTextoEmVozAlta();
+            }
+          };
+          utterance.onboundary = function(event) {
+            const trechoAtual = event.target.text.substring(event.charIndex, event.charIndex + event.charLength);
+            const novoTexto = event.target.text.substring(event.charIndex + event.charLength);
+            const textContainer = document.getElementById('textContainer');
+            textContainer.innerHTML = event.target.text.replace(novoTexto, `<span style="background-color: yellow;">${trechoAtual}</span>`);
+          };
+          speechSynthesisInstance = speechSynthesis;
+          speechSynthesisInstance.speak(utterance);
+        });
+      } else {
+        console.error('Síntese de fala não é suportada no navegador.');
+      }
+    }
+
+    // Obtendo elementos do DOM
+    const btnLoad = document.getElementById('inputFile');
+
+    // Definindo evento de clique no botão "Carregar PDF"
+    btnLoad.addEventListener('change', function() {
+      carregarPDF();
+    });
+  </script>
+</body>
+</html>
