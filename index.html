@@ -63,6 +63,9 @@
     <button id="btnPause" class="btn" disabled>Pausar</button>
     <button id="btnContinue" class="btn" disabled>Continuar</button>
     <div id="textContainer"></div>
+
+    <p>Nome do PDF: <span id="pdfName"></span></p>
+    <button onclick="reloadPage()">Recarregar/Remover PDF</button>
   </div>
 
   <script>
@@ -107,6 +110,10 @@
             });
           };
           reader.readAsArrayBuffer(file);
+
+          // Exibindo o nome do PDF carregado
+          const fileName = file.name;
+          document.getElementById('pdfName').innerText = fileName;
         } else {
           console.error('Por favor, selecione um arquivo PDF.');
         }
@@ -180,6 +187,11 @@
       } else {
         console.error('Síntese de fala não é suportada no navegador.');
       }
+    }
+
+    // Função para recarregar a página
+    function reloadPage() {
+      location.reload();
     }
 
     // Obtendo elementos do DOM
