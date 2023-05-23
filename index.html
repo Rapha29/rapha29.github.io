@@ -52,19 +52,19 @@
       cursor: not-allowed;
     }
 
-    .progress {
+    .progress-bar {
       width: 100%;
       height: 10px;
       background-color: #f2f2f2;
       border-radius: 5px;
       overflow: hidden;
+      margin-bottom: 10px;
     }
 
-    .progress-bar {
-      width: 0;
+    .progress-bar .progress {
+      width: 0%;
       height: 100%;
       background-color: #3498db;
-      transition: width 0.3s;
     }
   </style>
 </head>
@@ -79,8 +79,8 @@
     <button id="btnContinue" class="btn" disabled>Continuar</button>
     <div id="textContainer"></div>
 
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-bar">
+      <div class="progress"></div>
     </div>
 
     <p>Nome do PDF: <span id="pdfName"></span></p>
@@ -96,13 +96,21 @@
     // Função para carregar o PDF
     function carregarPDF() {
       const inputFile = document.getElementById('inputFile');
+      const progressBar = document.querySelector('.progress-bar .progress');
 
       if (inputFile.files.length > 0) {
         const file = inputFile.files[0];
 
         if (file.type === 'application/pdf') {
           const reader = new FileReader();
+          reader.onprogress = function(e) {
+            if (e.lengthComputable) {
+              const progress = (e.loaded / e.total) * 100;
+              progressBar.style.width = progress + '%';
+            }
+          };
           reader.onload = function(e) {
+            progressBar.style.width = '100%';
             const buffer = new Uint8Array(e.target.result);
             pdfjsLib.getDocument(buffer).promise.then(function(pdf) {
               pdfData = pdf;
@@ -215,20 +223,11 @@
 
     // Obtendo elementos do DOM
     const btnLoad = document.getElementById('inputFile');
-    const progressBar = document.getElementById('progressBar');
 
     // Definindo evento de clique no botão "Carregar PDF"
     btnLoad.addEventListener('change', function() {
       carregarPDF();
     });
-
-    // Função para atualizar a barra de progresso
-    function updateProgressBar() {
-      if (pdfData) {
-        const progress = (currentCharIndex / pdfData.numPages) * 100;
-        progressBar.style.width = progress + '%';
-      }
-    }
   </script>
 </body>
 </html>
