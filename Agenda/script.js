@@ -1,7 +1,7 @@
 // Lista de tarefas
 let tasks = [];
 
-// Função para adicionar uma tarefa à lista
+//adicionar uma tarefa à lista
 function addTask(description, details, priority) {
   const task = {
     description: description,
@@ -17,8 +17,7 @@ function addTask(description, details, priority) {
   updateTable();
   saveTasks();
 }
-
-// Função para marcar uma tarefa como concluída
+//marcar uma tarefa como concluída
 function completeTask(index) {
   if (index >= 0 && index < tasks.length) {
     tasks[index].completed = !tasks[index].completed;
@@ -33,7 +32,7 @@ function completeTask(index) {
   }
 }
 
-// Função para excluir uma tarefa
+// excluir uma tarefa
 function deleteTask(index) {
   if (index >= 0 && index < tasks.length) {
     tasks.splice(index, 1);
@@ -41,8 +40,7 @@ function deleteTask(index) {
     saveTasks();
   }
 }
-
-// Função para ordenar as tarefas
+//ordenar as tarefas
 function sortTasks() {
   tasks.sort((a, b) => {
     if (a.completed && !b.completed) {
@@ -67,7 +65,7 @@ function sortTasks() {
   });
 }
 
-// Função para atualizar a tabela com as tarefas
+//atualizar a tabela com as tarefas
 function updateTable() {
   const taskList = document.getElementById('taskList');
   const showCompleted = document.getElementById('showCompleted').checked;
