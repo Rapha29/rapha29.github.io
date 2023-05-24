@@ -20,13 +20,15 @@
       </div>
       <div class="form-group">
         <label for="priority">Prioridade:</label>
-        <select id="priority" required>
-          <option value="Normal">Normal</option>
-          <option value="Urgente">Urgente</option>
-          <option value="Muito Urgente">Muito Urgente</option>
-        </select>
+        <div class="input-group">
+          <select id="priority" required>
+            <option value="Normal">Normal</option>
+            <option value="Urgente">Urgente</option>
+            <option value="Muito Urgente">Muito Urgente</option>
+          </select>
+          <button type="submit" class="add-task-button">Adicionar</button>
+        </div>
       </div>
-      <button type="submit" class="add-task-button">Adicionar Tarefa</button>
     </form>
     <table>
       <thead>

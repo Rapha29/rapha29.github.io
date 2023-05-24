@@ -1,5 +1,5 @@
 body {
-  background-color: #f5f7fa;
+  background-image: url(bg.jpg);
   font-family: Arial, sans-serif;
   color: #333;
   margin: 0;
@@ -11,7 +11,7 @@ body {
   margin: 40px auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 1);
   border-radius: 4px;
 }
 
@@ -35,13 +35,14 @@ label {
 input[type="text"],
 select {
   padding: 10px;
-  width: 100%;
+  width: 97%;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .add-task-button {
   display: block;
+  height: auto;
   width: 100%;
   padding: 10px;
   background-color: #007bff;
@@ -53,7 +54,7 @@ select {
 }
 
 .add-task-button:hover {
-  background-color: #0069d9;
+  background-color: #1d8699;
 }
 
 table {
@@ -94,4 +95,18 @@ th {
 .muito-urgente {
   background-color: #2d3436;
   color: #fff;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group select {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.input-group .add-task-button {
+  flex: 0;
 }
