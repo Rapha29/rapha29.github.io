@@ -1,0 +1,43 @@
+body{
+    background-color: rgba(218, 218, 218, 0.548);
+}
+h1{
+    color:rgb(63, 63, 63)
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    color: rgb(37, 37, 37);
+    border: 1px solid rgb(133, 36, 125);
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+    color: rgb(255, 255, 255);
+  }
+  
+  .delete-icon {
+    cursor: pointer;
+  }
+  
+  .normal {
+    background-color: rgb(60, 148, 60);
+  }
+  
+  .urgente {
+    background-color: rgb(185, 146, 61);
+  }
+  
+  .muito-urgente {
+    background-color: rgb(182, 58, 37);
+  }
+  

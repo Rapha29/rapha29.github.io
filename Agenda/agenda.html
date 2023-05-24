@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Agenda de Tarefas</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>🗒 Agenda de Tarefas do Matheus 🗒</h1>
+  <form id="taskForm">
+    <label for="description">Descrição:</label>
+    <input type="text" id="description" required>
+    
+    <label for="details">Detalhes:</label>
+    <input type="text" id="details" required>
+    
+    <label for="priority">Prioridade:</label>
+    <select id="priority" required>
+      <option value="Normal">Normal</option>
+      <option value="Urgente">Urgente</option>
+      <option value="Muito Urgente">Muito Urgente</option>
+    </select>
+    
+    <button type="submit">Adicionar Tarefa</button>
+  </form>
+  <table>
+    <thead>
+      <tr id="tr">
+        <th>Concluido</th>
+        <th>Descrição</th>
+        <th>Detalhes</th>
+        <th>Prioridade</th>
+        <th>Data de Conclusão</th>
+        <th>Deletar</th>
+      </tr>
+    </thead>
+    <tbody id="taskList"></tbody>
+  </table>
+  
+ 
+  
+  <label>
+    <input type="checkbox" id="showCompleted" onchange="updateTable()">
+    Mostrar tarefas concluídas
+  </label>
+  
+  <script src="script.js"></script>
+</body>
+</html>

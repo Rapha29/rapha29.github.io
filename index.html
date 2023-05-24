@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rapha PDF Speaker</title>
+  <title>Leitor de PDF em Voz Alta</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <style>
     body {
@@ -51,26 +51,11 @@
       background-color: #bdc3c7;
       cursor: not-allowed;
     }
-
-    .progress-bar {
-      width: 100%;
-      height: 10px;
-      background-color: #f2f2f2;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .progress-bar .progress {
-      width: 0%;
-      height: 100%;
-      background-color: #3498db;
-    }
   </style>
 </head>
 <body>
   <div id="container">
-    <h1>Estude Ouvindo, Bons Estudos!</h1>
+    <h1>Leitor de PDF em Voz Alta</h1>
 
     <input type="file" id="inputFile" accept=".pdf">
     <label for="inputFile" class="btn">Carregar PDF</label>
@@ -78,13 +63,6 @@
     <button id="btnPause" class="btn" disabled>Pausar</button>
     <button id="btnContinue" class="btn" disabled>Continuar</button>
     <div id="textContainer"></div>
-
-    <div class="progress-bar">
-      <div class="progress"></div>
-    </div>
-
-    <p>Nome do PDF: <span id="pdfName"></span></p>
-    <button onclick="reloadPage()">Recarregar/Remover PDF</button>
   </div>
 
   <script>
@@ -96,21 +74,13 @@
     // Função para carregar o PDF
     function carregarPDF() {
       const inputFile = document.getElementById('inputFile');
-      const progressBar = document.querySelector('.progress-bar .progress');
 
       if (inputFile.files.length > 0) {
         const file = inputFile.files[0];
 
         if (file.type === 'application/pdf') {
           const reader = new FileReader();
-          reader.onprogress = function(e) {
-            if (e.lengthComputable) {
-              const progress = (e.loaded / e.total) * 100;
-              progressBar.style.width = progress + '%';
-            }
-          };
           reader.onload = function(e) {
-            progressBar.style.width = '100%';
             const buffer = new Uint8Array(e.target.result);
             pdfjsLib.getDocument(buffer).promise.then(function(pdf) {
               pdfData = pdf;
@@ -137,10 +107,6 @@
             });
           };
           reader.readAsArrayBuffer(file);
-
-          // Exibindo o nome do PDF carregado
-          const fileName = file.name;
-          document.getElementById('pdfName').innerText = fileName;
         } else {
           console.error('Por favor, selecione um arquivo PDF.');
         }
@@ -214,11 +180,6 @@
       } else {
         console.error('Síntese de fala não é suportada no navegador.');
       }
-    }
-
-    // Função para recarregar a página
-    function reloadPage() {
-      location.reload();
     }
 
     // Obtendo elementos do DOM
