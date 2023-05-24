@@ -91,7 +91,7 @@ function updateTable() {
       });
 
       const deleteButton = document.createElement('button');
-      deleteButton.textContent = 'Excluir';
+      deleteButton.textContent = 'X';
       deleteButton.addEventListener('click', function() {
         deleteTask(index);
       });
