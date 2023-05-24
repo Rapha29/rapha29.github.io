@@ -1,43 +1,97 @@
-body{
-    background-color: rgba(218, 218, 218, 0.548);
+body {
+  background-color: #f5f7fa;
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
-h1{
-    color:rgb(63, 63, 63)
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+}
+
+input[type="text"],
+select {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-task-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-task-button:hover {
+  background-color: #0069d9;
+}
+
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    color: rgb(37, 37, 37);
-    border: 1px solid rgb(133, 36, 125);
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  .completed {
-    text-decoration: line-through;
-    color: rgb(255, 255, 255);
-  }
-  
-  .delete-icon {
-    cursor: pointer;
-  }
-  
-  .normal {
-    background-color: rgb(60, 148, 60);
-  }
-  
-  .urgente {
-    background-color: rgb(185, 146, 61);
-  }
-  
-  .muito-urgente {
-    background-color: rgb(182, 58, 37);
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.delete-icon {
+  cursor: pointer;
+}
+
+.normal {
+  background-color: #b2bec3;
+}
+
+.urgente {
+  background-color: #636e72;
+  color: #fff;
+}
+
+.muito-urgente {
+  background-color: #2d3436;
+  color: #fff;
+}
