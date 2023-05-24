@@ -21,7 +21,8 @@ h1 {
 }
 
 form {
-  text-align: center;
+  font-weight: bold;
+  text-align: left;
 }
 
 .form-group {
