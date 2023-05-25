@@ -1,127 +1,222 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>Pomodoro Timer</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        background-color: #f5f5f5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
+<head>
+  <title>Pomodoro Timer</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s ease-in-out;
+    }
 
-      .btn {
-        padding: 10px 30px;
-        font-size: 2rem;
-        color: #fff;
-        border-radius: 10px;
-        cursor: pointer;
-        outline: none;
-        transition: opacity 0.3s ease-in-out;
-      }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
 
-      #green-btn {
-        background-color: #6fb936;
-        margin-right: 20px;
-      }
+    .instructions {
+      flex: 1;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
 
-      #red-btn {
-        background-color: #d32f2f;
-      }
+    .code {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      flex-direction: column;
+      align-items: center;
+    }
 
-      h1 {
-        text-align: center;
-        font-size: 3rem;
-      }
+    .btn {
+      padding: 10px 30px;
+      font-size: 2rem;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      outline: none;
+      transition: opacity 0.3s ease-in-out;
+    }
 
-      #countdown-timer {
-        margin-top: 50px;
-        font-size: 6rem;
-        text-align: center;
-      }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
 
-      #countdown-message {
-        margin-top: 20px;
-        font-size: 2rem;
-        text-align: center;
-      }
-    </style>
-  </head>
+    .btn-group .btn {
+      margin-right: 10px;
+    }
 
-  <body>
-    <div id="pomodoro-timer">
-      <h1>Pomodoro Timer</h1>
-      <button class="btn" id="green-btn">Estude agora</button>
-      <button class="btn" id="red-btn" disabled>Descanse agora</button>
-      <div id="countdown-timer"></div>
-      <div id="countdown-message"></div>
+    #green-btn {
+      background-color: #6fb936;
+    }
+
+    #red-btn {
+      background-color: #d32f2f;
+    }
+
+    #blue-btn {
+      width: 100%;
+      background-color: #2196f3;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+    }
+
+    #countdown-timer {
+      margin-top: 50px;
+      font-size: 6rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #countdown-message {
+      margin-top: 20px;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .bg-green {
+      background-color: #7eb653;
+    }
+
+    .bg-red {
+      background-color: #d64c4c;
+    }
+
+    .bg-blue {
+      background-color: #2196f3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="instructions">
+      <h2>Instruções de uso</h2>
+      <p>Aqui você pode adicionar suas instruções de uso do Pomodoro Timer.</p>
     </div>
+    <div class="code">
+      <div id="pomodoro-timer">
+        <h1>Pomodoro Timer</h1>
+        <div class="btn-group">
+          <button class="btn" id="green-btn">Estude agora</button>
+          <button class="btn" id="red-btn" disabled>Descanse agora</button>
+        </div>
+        <div id="countdown-timer"></div>
+        <div id="countdown-message"></div>
+        <button class="btn" id="blue-btn">Iniciar Contador</button>
+      </div>
+    </div>
+  </div>
 
-    <script>
-      const greenBtn = document.querySelector('#green-btn');
-      const redBtn = document.querySelector('#red-btn');
-      const countdownTimer = document.querySelector('#countdown-timer');
-      const countdownMessage = document.querySelector('#countdown-message');
+  <script>
+    const greenBtn = document.querySelector('#green-btn');
+    const redBtn = document.querySelector('#red-btn');
+    const blueBtn = document.querySelector('#blue-btn');
+    const countdownTimer = document.querySelector('#countdown-timer');
+    const countdownMessage = document.querySelector('#countdown-message');
+    const body = document.querySelector('body');
 
-      let countdownIntervalId;
+    let countdownIntervalId;
+    let remainingTime;
+    let isPaused = false;
+    let isAlertOpen = false;
 
-      // Função para iniciar o timer de estudo
-      function startStudyTimer() {
-        greenBtn.disabled = true;
-        redBtn.disabled = false;
-        countdownMessage.textContent = 'Estude agora';
+    // Função para iniciar o timer de estudo
+    function startStudyTimer() {
+      greenBtn.disabled = true;
+      redBtn.disabled = false;
+      blueBtn.disabled = false;
+      countdownMessage.textContent = 'Estude agora';
 
-        let remainingTime = 2 * 60;
-        displayCountdown(remainingTime);
+      remainingTime = 0.2 * 60;
+      displayCountdown(remainingTime);
 
-        countdownIntervalId = setInterval(() => {
+      countdownIntervalId = setInterval(() => {
+        if (!isPaused && !isAlertOpen) {
           remainingTime--;
 
           if (remainingTime === 0) {
             clearInterval(countdownIntervalId);
+            isPaused = true;
+            isAlertOpen = true;
             alert('Hora de descansar por 5 minutos!');
+            isAlertOpen = false;
             startRestTimer();
           } else {
             displayCountdown(remainingTime);
           }
-        }, 1000);
-      }
+        }
+      }, 1000);
 
-      // Função para iniciar o timer de descanso
-      function startRestTimer() {
-        greenBtn.disabled = true;
-        redBtn.disabled = false;
-        countdownMessage.textContent = 'Descanse agora';
+      body.classList.remove('bg-red', 'bg-blue');
+      body.classList.add('bg-green');
+      blueBtn.textContent = 'Iniciar Contador';
+    }
 
-        let remainingTime = 1 * 60;
-        displayCountdown(remainingTime);
+    // Função para iniciar o timer de descanso
+    function startRestTimer() {
+      greenBtn.disabled = true;
+      redBtn.disabled = false;
+      blueBtn.disabled = false;
+      countdownMessage.textContent = 'Descanse agora';
 
-        countdownIntervalId = setInterval(() => {
+      remainingTime = 0.1 * 60;
+      displayCountdown(remainingTime);
+
+      countdownIntervalId = setInterval(() => {
+        if (!isPaused && !isAlertOpen) {
           remainingTime--;
 
           if (remainingTime === 0) {
             clearInterval(countdownIntervalId);
+            isPaused = true;
+            isAlertOpen = true;
             alert('Hora de voltar a estudar!');
+            isAlertOpen = false;
             startStudyTimer();
           } else {
             displayCountdown(remainingTime);
           }
-        }, 1000);
-      }
+        }
+      }, 1000);
 
-      // Função para exibir o timer no formato MM:SS
-      function displayCountdown(timeInSeconds) {
-        const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
-        const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
-        countdownTimer.textContent = `${minutes}:${seconds}`;
-      }
+      body.classList.remove('bg-green', 'bg-blue');
+      body.classList.add('bg-red');
+      blueBtn.textContent = 'Iniciar Contador';
+    }
 
-      // Adicionando o event listener para iniciar o timer
-      greenBtn.addEventListener('click', startStudyTimer);
-    </script>
-  </body>
+    // Função para pausar ou continuar o timer
+    function pauseOrContinueTimer() {
+      isPaused = !isPaused;
+      blueBtn.textContent = isPaused ? 'Continuar' : 'Pausar';
+    }
+
+    // Função para exibir o timer no formato MM:SS
+    function displayCountdown(timeInSeconds) {
+      const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+      const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+      countdownTimer.textContent = `${minutes}:${seconds}`;
+    }
+
+    greenBtn.addEventListener('click', startStudyTimer);
+    redBtn.addEventListener('click', startRestTimer);
+    blueBtn.addEventListener('click', pauseOrContinueTimer);
+
+    // Event listener para iniciar o temporizador automaticamente ao mudar o estado
+    greenBtn.addEventListener('click', startStudyTimer);
+    redBtn.addEventListener('click', startRestTimer);
+  </script>
+</body>
 
 </html>
