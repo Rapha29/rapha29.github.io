@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Pomodoro Timer</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .btn {
+        padding: 10px 30px;
+        font-size: 2rem;
+        color: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        outline: none;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      #green-btn {
+        background-color: #6fb936;
+        margin-right: 20px;
+      }
+
+      #red-btn {
+        background-color: #d32f2f;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 3rem;
+      }
+
+      #countdown-timer {
+        margin-top: 50px;
+        font-size: 6rem;
+        text-align: center;
+      }
+
+      #countdown-message {
+        margin-top: 20px;
+        font-size: 2rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="pomodoro-timer">
+      <h1>Pomodoro Timer</h1>
+      <button class="btn" id="green-btn">Estude agora</button>
+      <button class="btn" id="red-btn" disabled>Descanse agora</button>
+      <div id="countdown-timer"></div>
+      <div id="countdown-message"></div>
+    </div>
+
+    <script>
+      const greenBtn = document.querySelector('#green-btn');
+      const redBtn = document.querySelector('#red-btn');
+      const countdownTimer = document.querySelector('#countdown-timer');
+      const countdownMessage = document.querySelector('#countdown-message');
+
+      let countdownIntervalId;
+
+      // Função para iniciar o timer de estudo
+      function startStudyTimer() {
+        greenBtn.disabled = true;
+        redBtn.disabled = false;
+        countdownMessage.textContent = 'Estude agora';
+
+        let remainingTime = 2 * 60;
+        displayCountdown(remainingTime);
+
+        countdownIntervalId = setInterval(() => {
+          remainingTime--;
+
+          if (remainingTime === 0) {
+            clearInterval(countdownIntervalId);
+            alert('Hora de descansar por 5 minutos!');
+            startRestTimer();
+          } else {
+            displayCountdown(remainingTime);
+          }
+        }, 1000);
+      }
+
+      // Função para iniciar o timer de descanso
+      function startRestTimer() {
+        greenBtn.disabled = true;
+        redBtn.disabled = false;
+        countdownMessage.textContent = 'Descanse agora';
+
+        let remainingTime = 1 * 60;
+        displayCountdown(remainingTime);
+
+        countdownIntervalId = setInterval(() => {
+          remainingTime--;
+
+          if (remainingTime === 0) {
+            clearInterval(countdownIntervalId);
+            alert('Hora de voltar a estudar!');
+            startStudyTimer();
+          } else {
+            displayCountdown(remainingTime);
+          }
+        }, 1000);
+      }
+
+      // Função para exibir o timer no formato MM:SS
+      function displayCountdown(timeInSeconds) {
+        const minutes = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+        const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+        countdownTimer.textContent = `${minutes}:${seconds}`;
+      }
+
+      // Adicionando o event listener para iniciar o timer
+      greenBtn.addEventListener('click', startStudyTimer);
+    </script>
+  </body>
+
+</html>
