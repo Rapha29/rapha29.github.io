@@ -10,7 +10,7 @@ body {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #f3f3f3;
   box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 1);
   border-radius: 4px;
 }
@@ -85,16 +85,17 @@ th {
 }
 
 .normal {
-  background-color: #b2bec3;
+  color:#fff;
+  background-color: #393d3f;
 }
 
 .urgente {
-  background-color: #636e72;
+  background-color: #102d36;
   color: #fff;
 }
 
 .muito-urgente {
-  background-color: #2d3436;
+  background-color: #311010;
   color: #fff;
 }
 
