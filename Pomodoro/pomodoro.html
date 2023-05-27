@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Pomodoro Timer</title>
+  <title>Pomodoro</title>
   <style>
     body {
       font-family: sans-serif;
@@ -110,9 +110,9 @@
       <h2>Instruções de uso</h2>
       <pre>        ☼ Adicione a Matéria ex:Rede e o conteudo ex:TA1, CW1 ou Livro
         ☼ Clice em iniciar estudo, e siga o tempo indicado no contador
-        ☼ Sempre que iniciar o estudo ou a pausa clique no botao azul
-        ☼ Nao clique em nada até o contador exibir a mensagem de estado
-        ☼ Apenas estude ou descanse conforme indicado pelas cores
+        ☼ Se presicar pausar seus estudos clique no botao azul abaixo
+        ☼ Estando a tela na cor verde estude até escutar o alerta sonoro
+        ☼ Assim que ouvir a musica de alternar volte para tele e inicie o contador
         ☼ Após concluir o estudo clique em OK na tabela</pre>
       <iframe id="iframe" src="agenda.html"></iframe>
     </div>
@@ -146,11 +146,11 @@
     // Função para iniciar o timer de estudo
     function startStudyTimer() {
       greenBtn.disabled = true;
-      redBtn.disabled = false;
+      redBtn.disabled = true;
       blueBtn.disabled = false;
       countdownMessage.textContent = 'Estude agora';
 
-      remainingTime = 25 * 60;
+      remainingTime = 0.2 * 60;
       displayCountdown(remainingTime);
 
       countdownIntervalId = setInterval(() => {
@@ -161,7 +161,6 @@
             clearInterval(countdownIntervalId);
             isPaused = true;
             isAlertOpen = true;
-            alert('Hora de descansar por 5 minutos!');
             isAlertOpen = false;
             startRestTimer();
           } else {
@@ -178,11 +177,13 @@
     // Função para iniciar o timer de descanso
     function startRestTimer() {
       greenBtn.disabled = true;
-      redBtn.disabled = false;
+      redBtn.disabled = true;
       blueBtn.disabled = false;
+      var audio = new Audio('ring.wav');
+      audio.play();
       countdownMessage.textContent = 'Descanse agora';
 
-      remainingTime = 5 * 60;
+      remainingTime = 0.1 * 60;
       displayCountdown(remainingTime);
 
       countdownIntervalId = setInterval(() => {
@@ -193,7 +194,8 @@
             clearInterval(countdownIntervalId);
             isPaused = true;
             isAlertOpen = true;
-            alert('Hora de voltar a estudar!');
+            var audio = new Audio('ring.wav');
+            audio.play();
             isAlertOpen = false;
             startStudyTimer();
           } else {
