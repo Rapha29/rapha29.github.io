@@ -1,83 +1,113 @@
-* {
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f9fc;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f3f3f3;
+  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 1);
+  border-radius: 4px;
 }
 
-.timer-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 350px;
-  height: 350px;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  background-color: #dff4ff;
-}
-
-.timer-box h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #2d3a45;
-}
-
-.timer-display {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 80px;
-  border-radius: 50%;
-  font-size: 48px;
-  font-weight: bold;
-  color: #2d3a45;
-  background-color: #fff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.timer-display span {
-  display: inline-block;
+h1 {
   text-align: center;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
+  margin-bottom: 20px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-top: 30px;
-}
-
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+form {
   font-weight: bold;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+}
+
+input[type="text"],
+select {
+  padding: 10px;
+  width: 97%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-task-button {
+  display: block;
+  height: auto;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
   color: #fff;
-  background-color: #2d3a45;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #1c262f;
+.add-task-button:hover {
+  background-color: #1d8699;
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.delete-icon {
+  cursor: pointer;
+}
+
+.normal {
+  color:#fff;
+  background-color: #393d3f;
+}
+
+.urgente {
+  background-color: #102d36;
+  color: #fff;
+}
+
+.muito-urgente {
+  background-color: #311010;
+  color: #fff;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group select {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.input-group .add-task-button {
+  flex: 0;
 }

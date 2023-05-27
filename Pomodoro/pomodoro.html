@@ -96,6 +96,11 @@
     .bg-blue {
       background-color: #2196f3;
     }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   </style>
 </head>
 
@@ -103,7 +108,11 @@
   <div class="container">
     <div class="instructions">
       <h2>Instruções de uso</h2>
-      <p>Aqui você pode adicionar suas instruções de uso do Pomodoro Timer.</p>
+      <pre>        ☼ Adicione a Matéria ex:Rede e o conteudo ex:TA1, CW1 ou Livro
+        ☼ Clice em iniciar estudo, e siga o tempo indicado no contador
+        ☼ Sempre que iniciar o estudo ou a pausa clique no botao azul
+        ☼ Após concluir o estudo clique em OK na tabela</pre>
+      <iframe id="iframe" src="agenda.html"></iframe>
     </div>
     <div class="code">
       <div id="pomodoro-timer">
@@ -139,7 +148,7 @@
       blueBtn.disabled = false;
       countdownMessage.textContent = 'Estude agora';
 
-      remainingTime = 0.2 * 60;
+      remainingTime = 25 * 60;
       displayCountdown(remainingTime);
 
       countdownIntervalId = setInterval(() => {
@@ -171,7 +180,7 @@
       blueBtn.disabled = false;
       countdownMessage.textContent = 'Descanse agora';
 
-      remainingTime = 0.1 * 60;
+      remainingTime = 5 * 60;
       displayCountdown(remainingTime);
 
       countdownIntervalId = setInterval(() => {

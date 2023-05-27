@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Extrair Texto de Vídeo</title>
+  <style>
+    body {
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #videoElement {
+      width: 400px;
+      height: 300px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 400px;
+      height: 150px;
+      resize: none;
+    }
+
+    .progress-bar {
+      width: 400px;
+      height: 10px;
+      background-color: #555;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #007bff;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    h6 {
+      font-size: 14px;
+      margin-top: 0;
+    }
+
+    a {
+      display: none;
+      color: #fff;
+      background-color: #007bff;
+      padding: 10px 20px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="file" id="videoInput" accept=".mp4">
+    <br>
+    <video id="videoElement" controls></video>
+    <br>
+    <h6 id="progressLabel">Barra de progresso</h6>
+    <div class="progress-bar">
+      <div class="progress-bar-fill"></div>
+    </div>
+    <br>
+    <textarea id="textArea" rows="10" cols="50" readonly></textarea>
+    <br>
+    <a id="downloadLink" style="display: none" download="texto_extraido.txt">Baixar</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js"></script>
+  <script>
+    let videoElement = document.getElementById('videoElement');
+    let progressBarFill = document.querySelector('.progress-bar-fill');
+    let progressLabel = document.getElementById('progressLabel');
+    let textArea = document.getElementById('textArea');
+    let downloadLink = document.getElementById('downloadLink');
+
+    document.getElementById('videoInput').addEventListener('change', function() {
+      let file = this.files[0];
+      let videoURL = URL.createObjectURL(file);
+      videoElement.src = videoURL;
+    });
+
+    videoElement.addEventListener('loadeddata', function() {
+      extractText();
+    });
+
+    async function extractText() {
+      // Carrega o modelo do Tesseract OCR
+      await Tesseract.create({
+        workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@2.2.2/dist/worker.min.js',
+        langPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@2.2.2/langs/',
+      });
+
+      let frames = await extractFramesFromVideo(videoElement);
+      let text = '';
+
+      for (let i = 0; i < frames.length; i++) {
+        let frame = frames[i];
+        let base64Image = await frameToBase64(frame);
+        let result = await Tesseract.recognize(base64Image, 'eng');
+
+        text += result.data.text;
+
+        // Atualiza a barra de progresso
+        let progress = ((i + 1) / frames.length) * 100;
+        progressBarFill.style.width = progress + '%';
+        progressLabel.innerText = `Barra de progresso (${Math.round(progress)}%)`;
+      }
+
+      textArea.value = text;
+      downloadLink.href = createTextFile(text);
+      downloadLink.style.display = 'inline';
+    }
+
+    function extractFramesFromVideo(video) {
+      return new Promise((resolve) => {
+        let canvas = document.createElement('canvas');
+        let context = canvas.getContext('2d');
+        let frames = [];
+
+        video.addEventListener('loadedmetadata', () => {
+          let duration = video.duration;
+          let interval = 1 / 30; // Intervalo de 1/30 segundos (30 fps)
+
+          for (let time = 0; time < duration; time += interval) {
+            video.currentTime = time;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            let frame = context.getImageData(0, 0, canvas.width, canvas.height);
+            frames.push(frame);
+          }
+
+          resolve(frames);
+        });
+      });
+    }
+
+    function frameToBase64(frame) {
+      return new Promise((resolve) => {
+        let canvas = document.createElement('canvas');
+        let context = canvas.getContext('2d');
+        canvas.width = frame.width;
+        canvas.height = frame.height;
+        context.putImageData(frame, 0, 0);
+
+        canvas.toBlob((blob) => {
+          let reader = new FileReader();
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+          reader.readAsDataURL(blob);
+        }, 'image/jpeg');
+      });
+    }
+
+    function createTextFile(text) {
+      let data = new Blob([text], { type: 'text/plain' });
+      return URL.createObjectURL(data);
+    }
+  </script>
+</body>
+</html>

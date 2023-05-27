@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarefas</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🗒 Meus Estudos 🗒</h1>
+    <form id="taskForm">
+      <div class="form-group">
+        <label for="description">Matéria:</label>
+        <input type="text" id="description" required>
+      </div>
+      <div class="form-group">
+        <label for="details">Conteudo:</label>
+        <input type="text" id="details" required>
+      </div>
+      <div class="form-group">
+        <label for="priority">Prioridade:</label>
+        <div class="input-group">
+          <select id="priority" required>
+            <option value="Normal">Normal</option>
+            <option value="Urgente">Urgente</option>
+            <option value="Muito Urgente">Muito Urgente</option>
+          </select>
+          <button type="submit" class="add-task-button">Adicionar</button>
+        </div>
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Ok</th>
+          <th>Descr.</th>
+          <th>Detal.</th>
+          <th>Prior.</th>
+          <th>Concl.</th>
+          <th>Del</th>
+        </tr>
+      </thead>
+      <tbody id="taskList"></tbody>
+    </table>
+    <label>
+      <input type="checkbox" id="showCompleted" onchange="updateTable()">
+      Mostrar tarefas concluídas
+    </label>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
