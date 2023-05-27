@@ -109,10 +109,10 @@
     <div class="instructions">
       <h2>Instruções de uso</h2>
       <pre>        ☼ Adicione a Matéria ex:Rede e o conteudo ex:TA1, CW1 ou Livro
-        ☼ Clice em iniciar estudo, e siga o tempo indicado no contador
-        ☼ Se presicar pausar seus estudos clique no botao azul abaixo
+        ☼ Clice em "Estude agora", estude durante o tempo indicado no contador
+        ☼ Se precisar pausar seus estudos clique no botao azul abaixo
         ☼ Estando a tela na cor verde estude até escutar o alerta sonoro
-        ☼ Assim que ouvir a musica de alternar volte para tele e inicie o contador
+        ☼ Assim que ouvir a musica de alternar volte para tela e inicie o contador
         ☼ Após concluir o estudo clique em OK na tabela</pre>
       <iframe id="iframe" src="agenda.html"></iframe>
     </div>
@@ -125,7 +125,7 @@
         </div>
         <div id="countdown-timer"></div>
         <div id="countdown-message"></div>
-        <button class="btn" id="blue-btn">Iniciar Contador</button>
+        <button class="btn" id="blue-btn">Pausar</button>
       </div>
     </div>
   </div>
@@ -171,7 +171,7 @@
 
       body.classList.remove('bg-red', 'bg-blue');
       body.classList.add('bg-green');
-      blueBtn.textContent = 'Iniciar Contador';
+      blueBtn.textContent = 'Pausar';
     }
 
     // Função para iniciar o timer de descanso
