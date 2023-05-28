@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Template Responsivo - Tecnologia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .top-bar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar p {
+            margin-bottom: 5px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .menu {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .image-card {
+            width: 200px;
+            margin: 10px;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .heart {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            position: relative;
+            animation: beat 1s infinite ease-in-out;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 52px;
+            height: 80px;
+            border-radius: 50px 50px 0 0;
+            background: red;
+        }
+
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .social-icons {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            color: #fff;
+            margin: 0 8px; /* Aumentado o espaçamento entre os ícones */
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #e74c3c;
+        }
+
+        /* Estilos CSS para dispositivos móveis */
+        @media (max-width: 768px) {
+            .image-card {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <p id="contact-info"><i class="fas fa-phone"></i> (XX) XXXX-XXXX</p>
+        <p>-</p>
+        <p id="current-time"></p>
+        <p>-</p>
+        <p id="temperature"></p>
+    </div>
+
+    <div class="menu">
+        <h1>Meu Site de Tecnologia</h1>
+    </div>
+
+    <div class="container">
+        <div class="image-gallery">
+            <div class="image-card">
+                <img src="https://via.placeholder.com/200" alt="Imagem 1">
+            </div>
+            <div class="image-card">
+                <img src="https://via.placeholder.com/200" alt="Imagem 2">
+            </div>
+            <div class="image-card">
+                <img src="https://via.placeholder.com/200" alt="Imagem 3">
+            </div>
+            <div class="image-card">
+                <img src="https://via.placeholder.com/200" alt="Imagem 4">
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="#" class="button">Botão 1</a>
+            <a href="#" class="button">Botão 2</a>
+            <a href="#" class="button">Botão 3</a>
+            <a href="#" class="button">Botão 4</a>
+        </div>
+
+        <div class="heart"></div>
+    </div>
+
+    <div class="social-icons">
+        <a href="#" class="fab fa-facebook"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        // Script JavaScript
+        // Capturar informações do navegador e preencher os dados
+
+        // Obter a hora atual do usuário
+        const currentTimeElement = document.getElementById('current-time');
+        const currentDate = new Date();
+        const currentHour = currentDate.getHours();
+        const currentMinute = currentDate.getMinutes();
+        const currentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinute
+            .toString()
+            .padStart(2, '0')}`;
+
+        currentTimeElement.innerText = currentTime;
+    </script>
+</body>
+</html>
