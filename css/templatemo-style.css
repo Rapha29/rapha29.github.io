@@ -8,6 +8,12 @@ body
 }
 
 /* start all section */
+nav {
+    height: 20px;
+    background-color: #000000; /* cor de fundo do menu */
+    /* Adicione mais estilos, se necessário */
+  }
+
 #home,
 #home .fp-slide,
 #home .fp-tableCell,
