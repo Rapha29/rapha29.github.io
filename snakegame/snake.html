@@ -3,6 +3,20 @@
 <head>
   <title>Snake Game</title>
   <style>
+    #navbar {
+      background-color: #000000;
+      color: #fff;
+      font-size: 18px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+    }
     body {
       background-image: url("bg.png");
       background-size: cover;
@@ -77,8 +91,10 @@
 </head>
 <body>
   <div id="menu-container">
-    <div id="high-score">Recorde: 0</div>
-    <div id="current-score">Pontuação: 0</div>
+    <nav id="navbar">
+      <div id="high-score">Recorde: 0</div>
+      <div id="current-score">Pontuação: 0</div>
+    </nav>
   </div>
 
   <div id="game-container">
