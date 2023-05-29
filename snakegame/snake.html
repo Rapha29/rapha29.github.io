@@ -12,6 +12,13 @@
 
     #game-container {
       text-align: center;
+      display: flex;
+      align-items: center;
+    }
+
+    #game-instructions {
+      margin-right: 20px;
+      text-align: left;
     }
 
     #game-board {
@@ -25,7 +32,7 @@
     }
     
     .snake {
-      background-color: green;
+      background-color: #556B2F;
       width: calc(100% / 20);
       height: calc(100% / 20);
       box-sizing: border-box;
@@ -33,7 +40,7 @@
     }
     
     .food {
-      background-color: red;
+      background-color: #8B008B;
       width: calc(100% / 20);
       height: calc(100% / 20);
       box-sizing: border-box;
@@ -48,8 +55,16 @@
 </head>
 <body>
   <div id="game-container">
-    <h1>Snake Game</h1>
-    <div id="score">Score: 0</div>
+    <div id="game-instructions">
+      <h2>Como Jogar</h2>
+      <p>Use as setas do teclado para controlar a cobra:</p>
+      <ul>
+        <li>Seta para cima: Mover para cima</li>
+        <li>Seta para baixo: Mover para baixo</li>
+        <li>Seta para a esquerda: Mover para a esquerda</li>
+        <li>Seta para a direita: Mover para a direita</li>
+      </ul>
+    </div>
     <div id="game-board"></div>
   </div>
 
