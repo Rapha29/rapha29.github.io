@@ -108,15 +108,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   
-    function gameOver() {
-      clearInterval(snakeInterval);
-      alert(`Game Over! Your score is ${score}.`);
-      score = 0;
-      snake = [{ x: 10, y: 10 }];
-      scoreElement.textContent = 'Score: 0';
-      snakeDirection = 'right';
-      startGame();
-    }
+function restartGame() {
+  clearInterval(snakeInterval);
+  location.reload(); //
+}
+
+function gameOver() {
+  clearInterval(snakeInterval);
+  const gameOverMessage = `Game Over! Your score is ${score}.`;
+
+  // Cria um elemento de parágrafo para exibir a mensagem de "Game Over"
+  const gameOverElement = document.createElement('p');
+  gameOverElement.textContent = gameOverMessage;
+
+  // Cria um botão para reiniciar o jogo
+  const restartButton = document.createElement('button');
+  restartButton.textContent = 'Restart';
+  restartButton.addEventListener('click', restartGame);
+
+  // Limpa o conteúdo atual do game-container
+  const gameContainer = document.getElementById('game-container');
+  gameContainer.innerHTML = '';
+
+  // Adiciona a mensagem de "Game Over" e o botão de reiniciar ao game-container
+  gameContainer.appendChild(gameOverElement);
+  gameContainer.appendChild(restartButton);
+
+  // Reseta as variáveis do jogo
+  score = 0;
+  snake = [{ x: 10, y: 10 }];
+  scoreElement.textContent = 'Score: 0';
+  snakeDirection = 'right';
+}
   
     function clearBoard() {
       while (gameBoard.firstChild) {
@@ -175,4 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', handleKeyPress);
     startGame();
   });
-  
+// ...
+
+
