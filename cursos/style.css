@@ -22,6 +22,19 @@ body {
           transform-style: preserve-3d;
 }
 
+.sidebar {
+  position: absolute;
+  margin-top: 50px;
+  color: #fefefe;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #111;
+  padding: 20px;
+}
+
+
 #drag-container, #spin-container {
   position: relative;
   display: -webkit-box;
