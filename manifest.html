@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <body>
+        <style>
+            body {
+                width: 100%;
+                height: 100%;
+                background-image: url(matrix.jpg); /*background image*/
+                overflow: hidden;
+            }
+            
+            .fade {
+                position: relative;
+                width: 100%;
+                min-height: 60vh;
+                top: -25px;
+                background-image: linear-gradient(0deg, transparent, black 75%);
+                z-index: 1;
+            }
+            
+            .star-wars {
+                display: flex;
+                justify-content: center;
+                position: relative;
+                height: 800px;
+                color: white;
+                font-family: 'Pathway Gothic One', sans-serif;
+                font-size: 500%;
+                font-weight: 600;
+                letter-spacing: 6px;
+                line-height: 150%;
+                perspective: 400px;
+                text-align: justify;
+            }
+            
+            .crawl {
+                position: relative;
+                top: 9999px;
+                transform-origin: 50% 100%;
+                animation: crawl 60s linear;
+            }
+            
+            .crawl>.title {
+                font-size: 90%;
+                text-align: center;
+            }
+            
+            .crawl>.title h1 {
+                margin: 0 0 100px;
+                text-transform: uppercase;
+            }
+            
+            @keyframes crawl {
+                0% {
+                    top: 0;
+                    transform: rotateX(20deg) translateZ(0);
+                }
+                100% {
+                    top: -6000px;
+                    transform: rotateX(25deg) translateZ(-2500px);
+                }
+            }
+        </style>
+        <div class="fade"></div>
+
+        <section class="star-wars">
+
+            <div class="crawl">
+
+                <div class="title">
+                    <!--Add title and subtitle here-->
+                    <p>O</p>
+                    <h1>MANIFESTO HACKER</h1>
+                </div>
+                <!--Add content here-->
+                <p>
+                    ensinam me entedia…
+
+Maldito estudante abaixo da média. Eles são todos parecidos.
+
+Eu estou no ensino fundamental ou no ensino médio. Eu ouvi os professores explicarem pela décima quinta vez como reduzir uma fração. Eu entendi. “Não, Professora, eu não colei ou copiei o meu trabalho. Eu fiz na minha cabeça…”
+
+Maldito garoto. Provavelmente copiou isto. Eles são todos parecidos.
+
+Eu fiz uma descoberta hoje. Eu encontrei um computador. Espere um segundo, isto é legal. Ele faz o que eu quero. Se ele comete um erro, é porque eu estraguei tudo. Não é porque não gosta de mim… Ou se sente ameaçado por mim… Ou pensa que eu sou um espertinho… Ou não gosta de ensinar e não deveria estar aqui …
+
+Maldito garoto. Tudo o que ele faz é jogar jogos. Eles são todos parecidos.
+
+E então aconteceu… uma porta aberta para um mundo… correndo através da linhas de internet como heroína pelas veias de um viciado, um pulso eletrônico é enviado, um refúgio contra as incompetências do dia-a-dia é solicitado… uma placa é encontrada.
+
+“Isto é tudo… isto é onde eu pertenço…” Eu conheço todo mundo aqui… mesmo que eu nunca tenha encontrado com eles, nunca falado com eles, e talvez possa nunca ouvi-los novamente… Eu conheço todos vocês…
+
+Maldito garoto. Eles são todos parecidos…
+
+Pode apostar que somos todos parecidos… temos sido alimentados com comida para bebê na escola enquanto tínhamos fome de carne…  Nós fomos dominados por sádicos, ou ignorados pelo apático. Os poucos que tiveram algo a nos ensinar, encontraram alunos dispostos, mas esses poucos são como gotas de água no deserto.
+
+Este é o nosso mundo agora… o mundo do elétron e do interruptor, a beleza da transmissão. Nós fazemos uso de um serviço que já existe sem pagar, o mesmo que poderia ser baratíssimo, se não fosse administrado por gulosos aproveitadores e você nos chama de criminosos. Nós exploramos… e vocês nos chamam de criminosos.
+
+Nós buscamos conhecimento… e vocês nos chamam de criminosos. Nós existimos sem cor de pele, sem nacionalidade, sem preconceito religioso… e vocês nos chamam de criminosos. Você constrói bombas atômicas, você empreende guerras, você assassina, engana, e mente para nós e tentam nos fazer acreditar que é para o nosso próprio bem, contudo nós somos os criminosos.
+
+Sim, eu sou um criminoso. Meu crime é o da curiosidade. Meu crime é o de julgar as pessoas pelo que elas dizem e pensam, não pelo o que aparentam. Meu crime é o de ser mais esperto que você, algo pelo qual você nunca vai me perdoar.
+                    </p>
+                <p>Eu sou um hacker e este é o meu manifesto. Você pode parar este indivíduo, mas você não pode parar todos nós… afinal, somos todos parecidos.</p>
+
+            </div>
+
+        </section>
+    </body>
+</head>
+
+</html>
