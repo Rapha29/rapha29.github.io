@@ -1,0 +1,43 @@
+img {
+    border-radius: 100%;
+}
+
+.outer {
+    margin: auto;
+    height: 300px;
+    width: 400px;
+    position: relative;
+}
+p {
+    margin-left: 80px;
+}
+.in {
+    margin-left: 80px;
+    padding: 10px;
+}
+#bt {
+    margin-top: 20px;
+    position: absolute;
+    left: 150px;
+}
+#bt:hover {
+    background: green;
+    font-size: 13px;
+    cursor: pointer;
+    color: white;
+}
+body {
+    background: url(https://oyepriyansh.pages.dev/i/bg.jpg) no-repeat scroll center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+* {
+    color: white;
+}
+input {
+    background-color: #292929;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+}
