@@ -1,0 +1,408 @@
+/* ------------ VARIABLES ------------ */
+:root {
+  /* COLORS */
+  --color: #9176FF;
+  --dark-color: #2b2b2b;
+  --dark-icon-color: #fff;
+  --light-color: #f7f7f7;
+  --light-icon-color: #FFDE59;
+}
+
+/* ------------ BASE ------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: normal;
+  height: 100vh;
+  background-color: var(--light-color);
+}
+
+/* -------------- BUTTON -------------- */
+.btn {
+  background-color: #fff;
+  width: 15em;
+  height: 8em;
+  border-radius: 10em;
+  padding: 0 0.5em;
+
+  box-shadow: inset 0 8px 60px rgba(0,0,0, .1),
+              inset 0 8px 8px rgba(0,0,0, .1),
+              inset 0 -4px 4px rgba(0,0,0, .1);
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  top: 10px; /* Adicionado para alinhar a 10px do topo */
+}
+
+.btn__indicator {
+  background-color: #fff;
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+
+  position: absolute;
+
+  box-shadow: 0 8px 40px rgba(0,0,0, .2);
+
+  transition: transform .3s ease;
+}
+
+.btn__icon-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn__icon {
+  color: var(--light-icon-color);
+  font-size: 3rem;
+}
+
+/* -------------- ANIMATION ------------ */
+.btn__icon.animated {
+  animation: spin 0.5s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------- DARKMODE -------------- */
+body.darkmode {
+  background-color: var(--dark-color);
+}
+
+.darkmode .btn {
+  box-shadow: inset 0 8px 60px rgba(0,0,0, .3),
+              inset 8px 0 8px rgba(0,0,0, .3),
+              inset 0 -4px 4px rgba(0,0,0, .3);
+}
+
+.darkmode .btn__indicator {
+  transform: translateX(7em);
+  background-color: var(--dark-color);
+  box-shadow: 0 8px 40px rgba(0,0,0, .3);
+}
+
+.darkmode .btn__icon {
+  color: var(--dark-icon-color);
+}
+
+/* -------------- CONTAINER -------------- */
+.container {
+  width: 1000px;
+  position: relative;
+  display:block;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.container .card {
+  position: relative;
+  margin: 10px; /* Adicione uma margem para separar as caixas */
+}
+
+.container .card .face {
+  width: 300px;
+  height: 200px;
+  transition: .4s;
+}
+
+.container .card .face.face1 {
+  position: relative;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+}
+
+.container .card:hover .face.face1 {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 0 60px whitesmoke,
+    inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff,
+    inset 20px 0 300px #f0f,
+    inset -20px 0 300px #0ff,
+    0 0 50px #fff,
+    -10px 0 80px #f0f,
+    10px 0 80px #0ff;
+}
+
+.container .card .face.face1 .content {
+  opacity: .2;
+  transition:  0.5s;
+  text-align: center;
+}
+
+.container .card:hover .face.face1 .content {
+  opacity: 1;
+}
+
+.container .card .face.face1 .content i {
+  font-size: 3em;
+  color: white;
+  display: inline-block;
+}
+
+.container .card .face.face1 .content h3 {
+  font-size: 1em;
+  color: white;
+  text-align: center;
+}
+
+.container .card .face.face1 .content a {
+  transition: .5s;
+}
+
+.container .card .face.face2 {
+  position: relative;
+  background: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0,0,0,.8);
+  transform: translateY(-100px);
+}
+
+.container .card:hover .face.face2 {
+  transform: translateY(0);
+}
+
+.container .card .face.face2 .content p,
+.container .card .face.face2 .content a {
+  font-size: 10pt;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container .card .face.face2 .content a {
+  text-decoration: none;
+  color: black;
+  box-sizing: border-box;
+  outline: 1px dashed #333;
+  padding: 10px;
+  margin: 15px 0 0;
+  display: inline-block;
+}
+
+.container .card .face.face2 .content a:hover {
+  background: #333;
+  color: whitesmoke;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+}
+
+/* -------------- DARKMODE - CONTAINER -------------- */
+body.darkmode .container .card .face.face1 {
+  background: var(--dark-color);
+}
+
+body.darkmode .container .card .face.face1 .content i {
+  color: var(--dark-icon-color);
+}
+
+body.darkmode .container .card .face.face1 .content h3 {
+  color: var(--dark-icon-color);
+}
+
+body.darkmode .container .card .face.face2 {
+  background: var(--dark-color);
+}
+
+body.darkmode .container .card .face.face2 .content p,
+body.darkmode .container .card .face.face2 .content a {
+  color: var(--dark-icon-color);
+}
+
+body.darkmode .container .card .face.face2 .content a {
+  color: var(--dark-icon-color);
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+/* -------------- DARK MODE TOGGLE BUTTON -------------- */
+.dark-mode-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}/* ------------ VARIABLES ------------ */
+:root {
+  /* COLORS */
+  --color: #9176FF;
+  --dark-color: #2b2b2b;
+  --dark-icon-color: #fff;
+  --light-color: #f7f7f7;
+  --light-icon-color: #FFDE59;
+}
+
+/* ------------ BASE ------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: normal;
+  height: 100vh;
+  background-color: var(--light-color);
+}
+
+/* -------------- BUTTON -------------- */
+.btn {
+  background-color: #fff;
+  width: 15em;
+  height: 8em;
+  border-radius: 10em;
+  padding: 0 0.5em;
+
+  box-shadow: inset 0 8px 60px rgba(0,0,0, .1),
+              inset 0 8px 8px rgba(0,0,0, .1),
+              inset 0 -4px 4px rgba(0,0,0, .1);
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  top: 10px; /* Adicionado para alinhar a 10px do topo */
+}
+
+.btn__indicator {
+  background-color: #fff;
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+
+  position: absolute;
+
+  box-shadow: 0 8px 40px rgba(0,0,0, .2);
+
+  transition: transform .3s ease;
+}
+
+.btn__icon-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn__icon {
+  color: var(--light-icon-color);
+  font-size: 3rem;
+}
+
+/* -------------- ANIMATION ------------ */
+.btn__icon.animated {
+  animation: spin 0.5s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------- DARKMODE -------------- */
+body.darkmode {
+  background-color: var(--dark-color);
+}
+
+.darkmode .btn {
+  box-shadow: inset 0 8px 60px rgba(0,0,0, .3),
+              inset 8px 0 8px rgba(0,0,0, .3),
+              inset 0 -4px 4px rgba(0,0,0, .3);
+}
+
+.darkmode .btn__indicator {
+  transform: translateX(7em);
+  background-color: var(--dark-color);
+  box-shadow: 0 8px 40px rgba(0,0,0, .3);
+}
+
+.darkmode .btn__icon {
+  color: var(--dark-icon-color);
+}
+
+/* -------------- CONTAINER -------------- */
+.container {
+  width: 1000px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  display: none; /* Hide the container initially in light mode */
+}
+
+/* -------------- DARKMODE - CONTAINER -------------- */
+body.darkmode .container {
+  display: flex; /* Display the container in dark mode */
+  position: relative;
+  top: 10px;
+}
+
+/* -------------- DARK MODE TOGGLE BUTTON -------------- */
+.dark-mode-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+
+.dark-mode-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.dark-mode-toggle label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dark-mode-toggle .toggle-icon {
+  font-size: 1.5rem;
+  color: var(--dark-icon-color);
+  margin-right: 5px;
+}
+
+.dark-mode-toggle .toggle-text {
+  color: var(--dark-icon-color);
+}
+
+.dark-mode-toggle input[type="checkbox"]:checked + label .toggle-icon {
+  color: var(--light-icon-color);
+}
+
+.dark-mode-toggle input[type="checkbox"]:checked + label .toggle-text {
+  color: var(--light-icon-color);
+}
