@@ -227,19 +227,6 @@ body.darkmode .container .card .face.face1 .content h3 {
   color: var(--dark-icon-color);
 }
 
-body.darkmode .container .card .face.face2 {
-  background: var(--dark-color);
-}
-
-body.darkmode .container .card .face.face2 .content p,
-body.darkmode .container .card .face.face2 .content a {
-  color: var(--dark-icon-color);
-}
-
-body.darkmode .container .card .face.face2 .content a {
-  color: var(--dark-icon-color);
-  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
-}
 
 /* -------------- DARK MODE TOGGLE BUTTON -------------- */
 .dark-mode-toggle {
