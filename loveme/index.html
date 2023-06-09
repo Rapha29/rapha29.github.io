@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmação</title>
+    <style>
+        #question {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            text-align: center;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        #no-button {
+            position: absolute;
+	    top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="question">Me ama?</div>
+    <div id="button-container">
+        <button id="yes-button" class="button">Sim</button>
+        <button id="no-button" class="button" onmouseover="moveNoButton()">Não</button>
+    </div>
+
+    <script>
+        function moveNoButton() {
+            var noButton = document.getElementById("no-button");
+            var viewportWidth = window.innerWidth;
+            var viewportHeight = window.innerHeight;
+
+            var buttonWidth = noButton.offsetWidth;
+            var buttonHeight = noButton.offsetHeight;
+
+            var newLeft = Math.random() * (viewportWidth - buttonWidth);
+            var newTop = Math.random() * (viewportHeight - buttonHeight);
+
+            noButton.style.left = newLeft + "px";
+            noButton.style.top = newTop + "px";
+        }
+    </script>
+</body>
+</html>
