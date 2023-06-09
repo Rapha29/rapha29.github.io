@@ -34,7 +34,7 @@
 <body>
     <div id="question">Me ama?</div>
     <div id="button-container">
-        <button id="yes-button" class="button">Sim</button>
+        <button id="yes-button" class="button" onclick="alerta()">Sim</button>
         <button id="no-button" class="button" onmouseover="moveNoButton()">Não</button>
     </div>
 
@@ -52,6 +52,9 @@
 
             noButton.style.left = newLeft + "px";
             noButton.style.top = newTop + "px";
+        }
+        function alerta() {
+            alert("Ownnn que fofo, tambem te amo")
         }
     </script>
 </body>
