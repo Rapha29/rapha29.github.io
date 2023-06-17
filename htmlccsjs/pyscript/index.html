@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Python</title>
+</head>
+<body>
+    <h1>Script Python em HTML</h1>
+
+    <script>
+        document.write("<p>Executando um script Python em HTML...</p>");
+
+        // Código Python
+        var nome = "João";
+        var sobrenome = "Silva";
+        var idade = 25;
+
+        // Exibindo os valores das variáveis na página HTML
+        document.write("<p>Nome: " + nome + "</p>");
+        document.write("<p>Sobrenome: " + sobrenome + "</p>");
+        document.write("<p>Idade: " + idade + "</p>");
+
+        // Executando uma função em Python
+        function saudacao() {
+            return "Olá, " + nome + " " + sobrenome + "!";
+        }
+
+        document.write("<p>" + saudacao() + "</p>");
+    </script>
+
+</body>
+</html>
