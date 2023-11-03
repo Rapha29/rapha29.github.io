@@ -12,6 +12,7 @@ function addTask(description, details, priority) {
     createdAt: new Date()
   };
 
+
   tasks.push(task);
   sortTasks();
   updateTable();
