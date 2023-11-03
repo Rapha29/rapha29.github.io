@@ -2165,11 +2165,11 @@ header .circle {
   }
 
   .swiper-button-next {
-    right: 1.3rem;
+    left: 1.3rem;
   }
 
   .swiper-button-prev {
-    right: 3rem;
+    left: 3rem;
   }
 
   .contact {
