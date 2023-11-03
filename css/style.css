@@ -1036,13 +1036,15 @@ header .circle {
 }
 
 .swiper-button-next {
-  right: 2rem;
+  bottom: -10px;
+  right: 10px;
   left: initial;
 }
 
 .swiper-button-prev {
-  right: 4.5rem;
-  left: initial;
+  bottom: -10px;
+  left: 2rem;
+  right: initial;
 }
 
 .swiper-button-prev:after,
@@ -1700,10 +1702,13 @@ header .circle {
   }
 
   .swiper-button-next {
+    bottom: -10px;
     right: 2.5rem;
   }
 
   .swiper-button-prev {
+    display: none;
+    bottom: -10px;
     right: 4.5rem;
   }
 
@@ -2165,11 +2170,13 @@ header .circle {
   }
 
   .swiper-button-next {
-    left: 1.3rem;
+    bottom: -10px;
+    right: 1.3rem;
   }
 
-  .swiper-button-prev {
-    left: 3rem;
+  .swiper-button-prev {  
+    bottom: -50px;
+    left: 1rem;
   }
 
   .contact {
